@@ -1,0 +1,6 @@
+[submodule "RaspberryPi6"]
+	path = RaspberryPi6
+	url = https://github.com/Fnhid/RaspberryPi6
+[submodule "Upm3ra"]
+	path = Upm3ra
+	url = https://github.com/Fnhid/RaspberryPi6
