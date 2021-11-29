@@ -20,7 +20,7 @@ GPIO.setup(SWITCH_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 path = '/home/pi/Upm3ra/static/images/pic'
 camera = picamera.PiCamera()
 spi = spidev.SpiDev()
-spi.max_speed_hz = 100000
+
 
 def analog_read(channel):
     ret = spi.xfer2([1, (channel + 8) << 4, 0])
@@ -128,6 +128,7 @@ def picUpload():
     if camera and sensor and spi:
         try:
             spi.open(0, 0)
+            spi.max_speed_hz = 100000
             button = 0
             camera.resolution = (640, 480)
             camera.start_preview()
