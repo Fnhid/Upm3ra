@@ -61,6 +61,7 @@ def signup():
         if pw == ckpw:
             sql = "INSERT INTO users VALUES ('%s', '%s')" % (id, pw)
             cursor.execute(db)
+            print('succ')
             data = cursor.fetchall()
             if not data:
                 db.commit()
