@@ -93,7 +93,7 @@ def signin():
         if data:
             session['login_user'] = id
             session.permanet = True
-            return redirect(url_for('bss'))
+            return redirect(url_for('main'))
         else:
             err = 'Invalid ID or PW.'
     return render_template('signin.html', err=err)
@@ -102,7 +102,6 @@ def signin():
 @login_required
 def main():
     err = None
-    id = session['login_user']
     if request.method == 'GET':
         db = mysql.connect()
         cur = db.cursor()
