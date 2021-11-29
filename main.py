@@ -6,7 +6,7 @@ import picamera
 import RPi.GPIO as GPIO
 import Adafruit_DHT
 import spidev
-from flask_sqlalchemy import SQLAlchemy
+from flaskext.mysql import MySQL
 GPIO.setwarnings(False)
 sensor = Adafruit_DHT.DHT11
 #=====================
