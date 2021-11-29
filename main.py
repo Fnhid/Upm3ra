@@ -6,6 +6,7 @@ import picamera
 import RPi.GPIO as GPIO
 import Adafruit_DHT
 import spidev
+import os
 from flask_session import Session
 from flaskext.mysql import MySQL
 GPIO.setwarnings(False)
@@ -38,6 +39,7 @@ def login_required(f):
     return deco_func
 
 app = Flask(__name__)
+app.secret_key = os.urandom(24)
 mysql = MySQL()
 app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = 'toor'
