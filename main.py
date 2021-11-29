@@ -41,7 +41,7 @@ mysql = MySQL()
 app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = 'toor'
 app.config['MYSQL_DATABASE_DB'] = 'upm3ra'
-app.config['MYSQL_DATABASE_HOST'] = 'raspberrypi.mshome.net'
+app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
 @app.route("/")
 def ailen():
