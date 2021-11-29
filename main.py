@@ -95,7 +95,7 @@ def signin():
         if data:
             session['login_user'] = id
             session.permanet = True
-            return redirect(url_for('main'))
+            return redirect(url_for('/main'))
         else:
             err = 'Invalid ID or PW.'
     return render_template('signin.html', err=err)
