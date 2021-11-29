@@ -150,7 +150,6 @@ def picUpload():
         err = "No Camera or LDR or DHT Ready."
     return render_template('upload.html', err=err)
 @app.route("/upload.html", methods=['GET', 'POST'])
-@login_required
 def upload():
     err = None
     id = session['login_user']
