@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request, url_for
+from flask import Flask, render_template, jsonify, redirect, request, url_for
 from functools import wraps
 import pymysql
 import time
@@ -6,6 +6,7 @@ import picamera
 import RPi.GPIO as GPIO
 import Adafruit_DHT
 import spidev
+from sqlalchemy import create_engine, text
 GPIO.setwarnings(False)
 sensor = Adafruit_DHT.DHT11
 #=====================
@@ -36,12 +37,10 @@ def login_required(f):
     return deco_func
 
 app = Flask(__name__)
+app.config.from_pyfile('config.py')
+database = create_engine(app.config['DB_URL'], encoding = 'utf-8')
+app.database = database
 
-app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'cha0430!'
-app.config['MYSQL_DATABASE_DB'] = 'fnhid'
-app.config['MYSQL_DATABASE_HOST'] = 'localhost'
-app.secret_key = "FNHID"
 mysql.init_app(app)
 @app.route("/")
 def ailen():
