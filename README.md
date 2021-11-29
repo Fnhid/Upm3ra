@@ -7,3 +7,19 @@ Upl0ad with Cam3ra. H0w S1mpl3! / KDMHS IoT Final Group Project.<br>
       <dt>v1.0.0-alpha</dt>
       <dd>Init Project.</dd>
 </dl>
+<!-- {% for i in data_list %}
+            <tr>
+                <td>
+                    {{ i }}
+                </td>
+                <td>
+                    {{ i[0] }}
+                </td>
+                <td>
+                    {{ i[1] }}
+                </td>
+                <td>
+                    {{ i[2] }}
+                </td>
+            </tr>
+            {% endfor % } -->
