@@ -98,6 +98,7 @@ def main():
     if session:
         err = None
         if request.method == 'GET':
+            user=session['login_user']
             db = mysql.connect()
             cur = db.cursor()
             sql = "SELECT title, id, contents, filename, hum, tem, light FROM content ORDER BY filename desc"
@@ -105,18 +106,10 @@ def main():
             data = cur.fetchall()
             data_list = []
             for obj in data:
-                data_list = {
-                    'title':obj[0],
-                    'writer':obj[1],
-                    'contents':obj[2],
-                    'filepath':obj[3],
-                    'hum':obj[4],
-                    'tem':obj[5],
-                    'light':obj[6]
-                }
+                data_list = {obj[0],obj[1],obj[2],obj[3],obj[4],obj[5],obj[6]}
             cur.close()
             db.close()
-            return render_template('main.html', data_list=data_list)
+            return render_template('main.html', data_list=data_list, user=user)
     else:
         return render_template('signin.html')
 
