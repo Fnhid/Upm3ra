@@ -12,6 +12,7 @@ LED_PIN = 17
 SWITCH_PIN = 6
 DHT_PIN = 18
 #=====================
+GPIO.setmode(GPIO.BCM)
 GPIO.setup(LED_PIN, GPIO.OUT)
 GPIO.setup(SWITCH_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 path = '/home/pi/Upm3ra/static/images/pic'
