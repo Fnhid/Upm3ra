@@ -59,7 +59,7 @@ def signup():
         db = mysql.connect()
         cur = db.cursor()
         if pw == ckpw:
-            sql = "INSERT INTO users VALUES ('%s', '%s')" 
+            sql = "INSERT INTO users VALUES (%s, %s)" 
             value = (id, pw)
             cur.execute(sql, value)
             print('succ')
