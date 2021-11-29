@@ -2,7 +2,6 @@ from flask import Flask, render_template, jsonify, redirect, request, url_for
 from functools import wraps
 import pymysql
 import time
-import cv2
 import picamera
 import RPi.GPIO as GPIO
 import Adafruit_DHT
@@ -15,13 +14,12 @@ LED_PIN = 17
 SWITCH_PIN = 6
 DHT_PIN = 18
 #=====================
-
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(LED_PIN, GPIO.OUT)
 GPIO.setup(SWITCH_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 path = '/home/pi/Upm3ra/static/images/pic/'
-camera = picamera.PiCamera()
+
 spi = spidev.SpiDev()
 
 
@@ -127,12 +125,14 @@ def main():
 def picUpload():
     global hum, tem, ntime, light
     err = None
+    camera = picamera.PiCamera()
     if camera and sensor and spi:
         try:
             spi.open(0, 0)
             spi.max_speed_hz = 100000
             button = 0
             camera.resolution = (640, 480)
+            
             camera.start_preview()
             GPIO.output(LED_PIN, GPIO.LOW)
             while not button:
@@ -142,13 +142,13 @@ def picUpload():
                     ntime = time.strftime("%Y%m%d_%H%M%S")
                     light = analog_read(0) / 1023 * 100
                     hum, tem = Adafruit_DHT.read_retry(sensor, DHT_PIN)
+                    camera.capture('%s%s.jpg' % (path, ntime))
 
-            camera.capture('%s/%s.jpg' % (path, ntime))
+            camera.stop_preview()
             filename = path + ntime + '.jpg'
             return render_template('upload.html', filename=filename, hum=hum, tem=tem, ntime=ntime)
         finally:
-            camera.stop_preview()
-           
+            camera.close()
     else:
         err = "No Camera or LDR or DHT Ready."
     return render_template('upload.html', err=err)
@@ -174,4 +174,4 @@ if __name__ == "__main__":
         app.run(host="0.0.0.0", debug=True)
     finally:
         GPIO.cleanup()
-        camera.close()
+
