@@ -100,7 +100,7 @@ def main():
         if request.method == 'GET':
             db = mysql.connect()
             cur = db.cursor()
-            sql = "SELECT title, id, contents, filename, hum, tem, light FROM content ORDER BY times desc"
+            sql = "SELECT title, id, contents, filename, hum, tem, light FROM content ORDER BY filename desc"
             cur.execute(sql)
             data = cur.fetchall()
             data_list = []
