@@ -59,8 +59,9 @@ def signup():
         db = mysql.connect()
         cur = db.cursor()
         if pw == ckpw:
-            sql = "INSERT INTO users VALUES ('%s', '%s')" % (id, pw)
-            cur.execute(db)
+            sql = "INSERT INTO users VALUES ('%s', '%s')" 
+            value = (id, pw)
+            cur.execute(sql, value)
             print('succ')
             data = cur.fetchall()
             if not data:
@@ -83,7 +84,6 @@ def signin():
         cur = db.cursor()
         sql = "SELECT id FROM users WHERE id = %s AND pw = %s"
         value = (id, pw)
-        cur.execute("set names utf8")
         cur.execute(sql, value)
         data = cur.fetchall()
         cur.close()
