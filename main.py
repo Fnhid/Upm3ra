@@ -15,6 +15,7 @@ LED_PIN = 17
 SWITCH_PIN = 6
 DHT_PIN = 18
 #=====================
+camera.close()
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(LED_PIN, GPIO.OUT)
 GPIO.setup(SWITCH_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
