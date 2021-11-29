@@ -62,7 +62,6 @@ def signup():
             sql = "INSERT INTO users VALUES (%s, %s)" 
             value = (id, pw)
             cur.execute(sql, value)
-            print('succ')
             data = cur.fetchall()
             if not data:
                 db.commit()
@@ -82,7 +81,7 @@ def signin():
         pw = request.form['pw']
         db = mysql.connect()
         cur = db.cursor()
-        sql = "SELECT id FROM users WHERE id = '%s' AND pw = '%s'"
+        sql = "SELECT id FROM users WHERE id = %s AND pw = %s"
         value = (id, pw)
         cur.execute(sql, value)
         data = cur.fetchall()
