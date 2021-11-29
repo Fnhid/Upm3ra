@@ -47,7 +47,7 @@ mysql.init_app(app)
 def ailen():
     return render_template('ailen.html')
 
-@app.route("/signup.html", methods=['GET', 'POST'])
+@app.route("/signup", methods=['GET', 'POST'])
 def signup():
     err = None
     if request.method == 'POST':
@@ -71,7 +71,7 @@ def signup():
             err = "Password Check Failed."
     return render_template('signup.html', err=err)
 
-@app.route("/signin.html", methods=['GET', 'POST'])
+@app.route("/signin", methods=['GET', 'POST'])
 def signin():
     err = None
     if request.method == 'POST':
@@ -97,7 +97,7 @@ def signin():
             err = 'Invalid ID or PW.'
     return render_template('signin.html', err=err)
 
-@app.route("/main.html", methods=['GET', 'POST'])
+@app.route("/main", methods=['GET', 'POST'])
 @login_required
 def main():
     err = None
@@ -120,7 +120,7 @@ def main():
         return render_template('main.html', data_list=data_list)
 
 
-@app.route("/picUpload.html", methods=['GET', 'POST'])
+@app.route("/picUpload", methods=['GET', 'POST'])
 @login_required
 def picUpload():
     global hum, tem, ntime, light
