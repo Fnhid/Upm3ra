@@ -2,6 +2,7 @@ from flask import Flask, render_template, jsonify, redirect, request, url_for
 from functools import wraps
 import pymysql
 import time
+import cv2
 import picamera
 import RPi.GPIO as GPIO
 import Adafruit_DHT
@@ -18,7 +19,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(LED_PIN, GPIO.OUT)
 GPIO.setup(SWITCH_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
-path = '/home/pi/Upm3ra/static/images/pic'
+path = '/home/pi/Upm3ra/static/images/pic/'
 camera = picamera.PiCamera()
 spi = spidev.SpiDev()
 
@@ -146,6 +147,7 @@ def picUpload():
             return render_template('upload.html', filename=filename, hum=hum, tem=tem, ntime=ntime)
         finally:
             camera.stop_preview()
+           
     else:
         err = "No Camera or LDR or DHT Ready."
     return render_template('upload.html', err=err)
@@ -171,3 +173,4 @@ if __name__ == "__main__":
         app.run(host="0.0.0.0", debug=True)
     finally:
         GPIO.cleanup()
+        camera.close()
