@@ -30,13 +30,6 @@ def analog_read(channel):
     adc_out = ((ret[1] & 3) << 8) + ret[2]
     return adc_out
 
-def login_required(f):
-    @wraps(f)
-    def deco_func(*args, **kwargs):
-        if session.get("id") is None:
-            return redirect(url_for("signin"))
-        return f(*args, **kwargs)
-    return deco_func
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -95,36 +88,38 @@ def signin():
         if data:
             session['login_user'] = id
             session.permanet = True
-            return redirect(url_for('/main'))
+            return redirect(url_for('main'))
         else:
             err = 'Invalid ID or PW.'
     return render_template('signin.html', err=err)
 
 @app.route("/main", methods=['GET', 'POST'])
-@login_required
 def main():
-    err = None
-    if request.method == 'GET':
-        db = mysql.connect()
-        cur = db.cursor()
-        sql = "SELECT title, id, ntime FROM content ORDER BY times desc"
-        cur.execute(sql)
-        data = cur.fetchall()
-        data_list = []
-        for obj in data:
-            data_list = {
-                'title':obj[0],
-                'writer':obj[1],
-                'ntime':obj[2]
-            }
-        cur.close()
-        db.close()
-        return render_template('main.html', data_list=data_list)
+    if session:
+        err = None
+        if request.method == 'GET':
+            db = mysql.connect()
+            cur = db.cursor()
+            sql = "SELECT title, id, ntime FROM content ORDER BY times desc"
+            cur.execute(sql)
+            data = cur.fetchall()
+            data_list = []
+            for obj in data:
+                data_list = {
+                    'title':obj[0],
+                    'writer':obj[1],
+                    'ntime':obj[2]
+                }
+            cur.close()
+            db.close()
+            return render_template('main.html', data_list=data_list)
+    else:
+        return render_template('signin.html')
 
 
 @app.route("/picUpload", methods=['GET', 'POST'])
-@login_required
 def picUpload():
+    
     global hum, tem, ntime, light
     err = None
     camera = picamera.PiCamera()
