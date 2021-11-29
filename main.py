@@ -6,6 +6,7 @@ import picamera
 import RPi.GPIO as GPIO
 import Adafruit_DHT
 import spidev
+GPIO.setwarnings(False)
 sensor = Adafruit_DHT.DHT11
 #=====================
 LED_PIN = 17
@@ -14,6 +15,7 @@ DHT_PIN = 18
 #=====================
 GPIO.setup(LED_PIN, GPIO.OUT)
 GPIO.setup(SWITCH_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+
 path = '/home/pi/Upm3ra/static/images/pic'
 camera = picamera.PiCamera()
 spi = spidev.SpiDev()
@@ -40,7 +42,6 @@ app.config['MYSQL_DATABASE_DB'] = 'fnhid'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 app.secret_key = "FNHID"
 mysql.init_app(app)
-try:
     @app.route("/")
     def ailen():
         return render_template('ailen.html')
@@ -164,6 +165,7 @@ try:
             data = cur.fetchall()
 
     if __name__ == "__main__":
-        app.run(host="0.0.0.0", debug=True)
-finally:
-    GPIO.cleanup()
+        try:
+            app.run(host="0.0.0.0", debug=True)
+        finally:
+            GPIO.cleanup()
