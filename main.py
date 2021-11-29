@@ -60,9 +60,9 @@ def signup():
         cur = db.cursor()
         if pw == ckpw:
             sql = "INSERT INTO users VALUES ('%s', '%s')" % (id, pw)
-            cursor.execute(db)
+            cur.execute(db)
             print('succ')
-            data = cursor.fetchall()
+            data = cur.fetchall()
             if not data:
                 db.commit()
                 return redirect(url_for('ailen'))
