@@ -81,9 +81,9 @@ def signin():
         cur = db.cursor()
         sql = "SELECT id FROM users WHERE id = %s AND pw = %s"
         value = (id, pw)
-        cursor.execute("set names utf8")
-        cursor.execute(sql, value)
-        data = cursor.fetchall()
+        cur.execute("set names utf8")
+        cur.execute(sql, value)
+        data = cur.fetchall()
         cur.close()
         db.close()
 
