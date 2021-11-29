@@ -7,6 +7,7 @@ import RPi.GPIO as GPIO
 import Adafruit_DHT
 import spidev
 from sqlalchemy import create_engine, text
+from flaskext.mysql import MySQL
 GPIO.setwarnings(False)
 sensor = Adafruit_DHT.DHT11
 #=====================
@@ -37,10 +38,11 @@ def login_required(f):
     return deco_func
 
 app = Flask(__name__)
-app.config.from_pyfile('config.py')
-database = create_engine(app.config['DB_URL'], encoding = 'utf-8')
-app.database = database
-
+mysql = MySQL()
+app.config['MYSQL_DATABASE_USER'] = 'root'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'toor'
+app.config['MYSQL_DATABASE_DB'] = 'upm3ra'
+app.config['MYSQL_DATABASE_HOST'] = 'raspberrypi.mshome.net'
 mysql.init_app(app)
 @app.route("/")
 def ailen():
