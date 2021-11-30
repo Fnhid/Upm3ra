@@ -132,7 +132,7 @@ def picUpload():
             hum, tem = Adafruit_DHT.read_retry(sensor, DHT_PIN)
             camera.capture('%s%s.jpg' % (path, ntime))
             filename = path + ntime + '.jpg'
-            return redirect(url_for('/upload', filename=filename, hum=hum, tem=tem, ntime=ntime))
+            return render_template('upload.html', filename=filename, hum=hum, tem=tem, ntime=ntime)
         else:
             err = "No Camera or LDR or DHT Ready."
             
