@@ -114,10 +114,9 @@ def main():
 
 @app.route("/picUpload", methods=['GET', 'POST'])
 def picUpload():
-    
     global hum, tem, ntime, light
     err = None
-    camera = picamera.PiCamera()
+    camera = PiCamera()
     if camera and sensor and spi:
         try:
             spi.open(0, 0)
@@ -135,7 +134,6 @@ def picUpload():
                     light = analog_read(0) / 1023 * 100
                     hum, tem = Adafruit_DHT.read_retry(sensor, DHT_PIN)
                     camera.capture('%s%s.jpg' % (path, ntime))
-
             camera.stop_preview()
             filename = path + ntime + '.jpg'
             return redirect(url_for('upload', filename=filename, hum=hum, tem=tem, ntime=ntime))
