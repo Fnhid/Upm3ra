@@ -13,7 +13,7 @@
     <title>bbs</title>
 </head>
 <body>
-  <!-- title, id, contents, filename, hum, tem, light -->
+  <!-- title, contents, id, filename, hum, tem, light -->
   <div>
     <div>
     <h1>Hi {{user}}</h1>
@@ -24,10 +24,10 @@
     <div class="col s12 m6">
       <div class="card blue-grey darken-1">
         <div class="card-content white-text">
-          <img src={{obj[2]}} class="center-block" width="100%" height="100%"  alt="File Not Loaded">
+          <img src={{obj[3]}} class="center-block" width="100%" height="100%"  alt="File Not Loaded">
           <span class="card-title">{{obj[0]}}</span>
-          <h3>{{obj[2]}}</h3>
-          <p>{{obj[1]}}</p>
+          <h5>{{obj[1]}}</h5>
+          <p>{{obj[2]}}</p>
         </div>
         <div class="card-action">
           <p>Humi : {{obj[4]}} / Temp : {{obj[5]}} / Light : {{obj[6]}}</p>
