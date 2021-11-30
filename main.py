@@ -131,10 +131,10 @@ def picUpload():
                 GPIO.wait_for_edge(6, GPIO.RISING)
                 GPIO.output(LED_PIN, GPIO.LOW)
                 ntime = time.strftime("%Y%m%d_%H%M%S")
-                light = str(analog_read(0) / 1023 * 100) + "%"
+                light = str(int(analog_read(0) / 1023 * 100)) + "%"
                 hum, tem = Adafruit_DHT.read_retry(sensor, DHT_PIN)
-                hum = str(hum)
-                tem = str(tem)
+                hum = str(int(hum))
+                tem = str(int(tem))
                 
                 camera.capture('%s%s.jpg' % (path, ntime))
                 filename = path + ntime + '.jpg'
@@ -160,8 +160,8 @@ def upload():
         if request.form == 'POST':
             title = request.form['title']
             contents = request.form['contents']
-            light = request.form['light']
-            filename = request.form['filename']
+            #light = request.form['light']
+            #filename = request.form['filename']
             db = mysql.connect()
             cur = db.cursor()
             sql = "INSERT into content values (%s, %s, %s, %s, %s, %s, %s)"
