@@ -137,12 +137,13 @@ def picUpload():
                     camera.capture('%s%s.jpg' % (path, ntime))
             filename = path + ntime + '.jpg'
             return redirect(url_for('upload', filename=filename, hum=hum, tem=tem, ntime=ntime))
+        else:
+            err = "No Camera or LDR or DHT Ready."
+            return render_template('upload.html', err=err)
     finally:
         camera.stop_preview()
         camera.close()
-    else:
-        err = "No Camera or LDR or DHT Ready."
-    return render_template('upload.html', err=err)
+    
 @app.route("/upload", methods=['GET', 'POST'])
 def upload():
     err = None
