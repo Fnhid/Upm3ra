@@ -4,7 +4,7 @@ flask와 라즈베리파이 카메라를 이용한 간단한 게시판 시스템
 
 <h2>--Patch Note--</h2>
 <dl>
-      <dt>v1.0.0-alpha</dt>
+      <dt>v1.0.0-alpha1</dt>
       <dd>Init Project.</dd>
 </dl>
 <!-- {% for i in data_list %}
