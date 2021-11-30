@@ -7,6 +7,7 @@ import RPi.GPIO as GPIO
 import Adafruit_DHT
 import spidev
 import os
+import numpy as np
 from flask_session import Session
 from flaskext.mysql import MySQL
 GPIO.setwarnings(False)
@@ -104,12 +105,9 @@ def main():
             sql = "SELECT title, id, contents, filename, hum, tem, light FROM content ORDER BY filename desc"
             cur.execute(sql)
             data = cur.fetchall()
-            data_list = []
-            for obj in data:
-                data_list = {obj[0],obj[1],obj[2],obj[3],obj[4],obj[5],obj[6]}
             cur.close()
             db.close()
-            return render_template('main.html', data_list=data_list, user=user)
+            return render_template('main.html', data_list=data, user=user)
     else:
         return render_template('signin.html')
 
