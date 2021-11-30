@@ -131,8 +131,9 @@ def picUpload():
                 GPIO.wait_for_edge(6, GPIO.RISING)
                 GPIO.output(LED_PIN, GPIO.LOW)
                 ntime = time.strftime("%Y%m%d_%H%M%S")
-                light = analog_read(0) / 1023 * 100
-                hum, tem = Adafruit_DHT.read_retry(sensor, DHT_PIN)
+                light = str(analog_read(0) / 1023 * 100) + "%"
+                hum, tem = str(Adafruit_DHT.read_retry(sensor, DHT_PIN))
+                
                 camera.capture('%s%s.jpg' % (path, ntime))
                 filename = path + ntime + '.jpg'
                 
