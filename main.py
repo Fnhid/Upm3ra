@@ -60,8 +60,10 @@ def signup():
             value = (id, pw)
             cur.execute(sql, value)
             data = cur.fetchall()
-            if not data:
+            if data:
                 db.commit()
+                cur.close()
+                db.close()
                 return redirect(url_for('ailen'))
             else:
                 db.rollback()
@@ -110,7 +112,7 @@ def main():
             db.close()
             return render_template('main.html', data_list=data, user=user)
     else:
-        return render_template('signin.html')
+        return redirect(url_for('signin'))
 
 
 @app.route("/picUpload", methods=['GET', 'POST'])
@@ -154,25 +156,25 @@ def picUpload():
     
 @app.route("/upload", methods=['GET', 'POST'])
 def upload():
-    global hum, tem, ntime, light, filename #vuln..
+    global hum, tem, light, filename #vuln..
     err = None
     if session:
-        if request.form == 'POST':
+        user = session['login_user']
+        if request.method == 'POST':
             title = request.form['title']
             contents = request.form['contents']
-            #light = request.form['light']
-            #filename = request.form['filename']
             db = mysql.connect()
             cur = db.cursor()
             sql = "INSERT INTO content VALUES (%s, %s, %s, %s, %s, %s, %s)"
-            cur.execute(sql, (title, contents, id, filename, hum, tem, light))
+            value = (title, contents, user, filename, hum, tem, light)
+            cur.execute(sql, value)
             data = cur.fetchall()
             if not data:
                 db.commit()
                 return redirect(url_for('main'))
             else:
                 db.rollback()
-                err = "Failed"
+                err = "failed"
         return render_template("upload.html", err=err, hum=hum, tem=tem, light=light, filename=filename)
     else:
         return render_template("main.html")
