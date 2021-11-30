@@ -5,19 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upm3ra</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lux/bootstrap.min.css" integrity="sha384-9+PGKSqjRdkeAU7Eu4nkJU8RFaH8ace8HGXnkiKMP9I9Te0GJ4/km3L1Z8tXigpG" crossorigin="anonymous">
 </head>
 <body>
-    <img src="{{filename}}" alt="Your Imag3"></a>
-    <h3>Temp : {{tem}}</h3>
-    <h3>Humi : {{hum}}</h3>
-    <h3>Light : {{light}}</h3>
+    <div><div>
+    <img src="{{filename}}" alt="Your Imag3"></a></div>
+    <div><h3>Temp : {{tem}}</h3></div>
+    <div><h3>Humi : {{hum}}</h3></div>
+    <div><h3>Light : {{light}}</h3></div>
+    </div>
     <form method="POST">
-        <label>Title</label>
-        <input type="title"/>
-        <label>Contents</label>
-        <textarea name="contents"></textarea>
-        <label>Confirm Password</label>
-        <input type="button" value="Submit" />
+        <div class="form-group">
+            <label class="col-form-label mt-4" for="inputDefault">Title</label>
+            <input name="title" type="text" class="form-control" placeholder="Default input" id="inputDefault">
+          </div>
+        <div class="form-group">
+            <label for="exampleTextarea" class="form-label mt-4">Contents</label>
+            <textarea name="content" class="form-control" id="exampleTextarea" rows="3"></textarea>
+        </div>
+        <input type="hidden" name="tem" value={{tem}} />
+        <input type="hidden" name="hum" value={{hum}} />
+        <input type="hidden" name="light" value={{light}} />
+        <input type="hidden" name="filename" value={{filename}}/>
+        <div>
+        <input type="submit" value="Submit">
+    </div>
     </form>
     <h1>{{err}}<h1>
 </body>

@@ -140,23 +140,27 @@ def picUpload():
 
             camera.stop_preview()
             filename = path + ntime + '.jpg'
-            return render_template('upload.html', filename=filename, hum=hum, tem=tem, ntime=ntime)
+            return redirect(url_for('upload', filename=filename, hum=hum, tem=tem, ntime=ntime))
         finally:
             camera.close()
     else:
         err = "No Camera or LDR or DHT Ready."
     return render_template('upload.html', err=err)
-@app.route("/upload.html", methods=['GET', 'POST'])
+@app.route("/upload", methods=['GET', 'POST'])
 def upload():
     err = None
     id = session['login_user']
     if request.form == POST:
         title = request.form['title']
         contents = request.form['contents']
+        tem = request.form['tem']
+        hum = request.form['hum']
+        light = request.form['light']
+        filename = request.form['filename']
         db = mysql.connect()
         cur = db.cursor()
 
-        sql = "INSERT into content values(%s, %s, %s, %s, %s, %s, %s)"
+        sql = "INSERT into content values (%s, %s, %s, %s, %s, %s, %s)"
         cur.execute(sql, (title, contents, id, filename, hum, tem, light))
         db.commit()
         db.close()
