@@ -124,6 +124,7 @@ def picUpload():
         camera.start_preview()
         try:
             if camera and sensor and spi:
+                loadsucc = 1
                 spi.open(0, 0)
                 spi.max_speed_hz = 100000
                 GPIO.output(LED_PIN, GPIO.HIGH)
@@ -134,7 +135,7 @@ def picUpload():
                 hum, tem = Adafruit_DHT.read_retry(sensor, DHT_PIN)
                 camera.capture('%s%s.jpg' % (path, ntime))
                 filename = path + ntime + '.jpg'
-                loadsucc = 1
+                
                 return redirect(url_for('upload'))
             else:
                 err = "No Camera or LDR or DHT Ready."
