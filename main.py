@@ -24,7 +24,7 @@ GPIO.setup(SWITCH_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 path = '/home/pi/Upm3ra/static/images/pic/'
 
 spi = spidev.SpiDev()
-global hum, tem, ntime, light, filename #vuln..
+
 
 
 def analog_read(channel):
@@ -115,6 +115,7 @@ def main():
 
 @app.route("/picUpload", methods=['GET', 'POST'])
 def picUpload():
+    global hum, tem, ntime, light, filename #vuln..
     if session:
         loadsucc = 0
         err = None
@@ -151,6 +152,7 @@ def picUpload():
 def upload():
     err = None
     if session:
+
         if request.form == 'POST':
             title = request.form['title']
             contents = request.form['contents']
