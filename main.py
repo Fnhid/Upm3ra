@@ -60,10 +60,8 @@ def signup():
             value = (id, pw)
             cur.execute(sql, value)
             data = cur.fetchall()
-            if data:
+            if not data:
                 db.commit()
-                cur.close()
-                db.close()
                 return redirect(url_for('ailen'))
             else:
                 db.rollback()
