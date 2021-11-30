@@ -117,14 +117,15 @@ def picUpload():
     global hum, tem, ntime, light
     err = None
     camera = picamera.PiCamera()
-    if camera and sensor and spi:
-        try:
+    camera.resolution = (640, 480)
+    camera.start_preview()
+    try:
+        if camera and sensor and spi:
+        
             spi.open(0, 0)
             spi.max_speed_hz = 100000
             button = 0
-            camera.resolution = (640, 480)
             
-            camera.start_preview()
             GPIO.output(LED_PIN, GPIO.LOW)
             while not button:
                 if(GPIO.input(SWITCH_PIN)):
@@ -134,12 +135,11 @@ def picUpload():
                     light = analog_read(0) / 1023 * 100
                     hum, tem = Adafruit_DHT.read_retry(sensor, DHT_PIN)
                     camera.capture('%s%s.jpg' % (path, ntime))
-
-            camera.stop_preview()
             filename = path + ntime + '.jpg'
             return redirect(url_for('upload', filename=filename, hum=hum, tem=tem, ntime=ntime))
-        finally:
-            camera.close()
+    finally:
+        camera.stop_preview()
+        camera.close()
     else:
         err = "No Camera or LDR or DHT Ready."
     return render_template('upload.html', err=err)
