@@ -114,7 +114,7 @@ def main():
 
 @app.route("/picUpload", methods=['GET', 'POST'])
 def picUpload():
-    global hum, tem, ntime, light
+    global hum, tem, ntime, light, filename, hum, tem, ntime
     err = None
     camera = picamera.PiCamera()
     camera.resolution = (640, 480)
@@ -132,7 +132,7 @@ def picUpload():
             hum, tem = Adafruit_DHT.read_retry(sensor, DHT_PIN)
             camera.capture('%s%s.jpg' % (path, ntime))
             filename = path + ntime + '.jpg'
-            return render_template('upload.html', filename=filename, hum=hum, tem=tem, ntime=ntime)
+            return redirect(url_for('upload'))
         else:
             err = "No Camera or LDR or DHT Ready."
             
@@ -140,7 +140,7 @@ def picUpload():
     finally:
         camera.stop_preview()
         camera.close()
-        return render_template('upload.html', err=err)
+        return render_template('picUpload.html', err=err)
     
 @app.route("/upload", methods=['GET', 'POST'])
 def upload():
@@ -161,7 +161,11 @@ def upload():
         db.commit()
         db.close()
         data = cur.fetchall()
-    return render_template("main.html", err=err)
+        if data:
+            return redirect(url_for('main'))
+        else:
+            err = 'Failed..'
+    return render_template("upload.html", err=err, hum=hum, tem=tem, light=light, filename=filename)
 
 if __name__ == "__main__":
     try:
