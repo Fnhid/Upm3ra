@@ -145,7 +145,7 @@ def picUpload():
             camera.stop_preview()
             camera.close()
             if not loadsucc:
-                return render_template('picUpload.html', err=err, filename=loadsucc)
+                return render_template('picUpload.html', err=err, filename=os.listdir())
     else:
         return render_template('main.html', data_list=data, user=user)
     
