@@ -114,7 +114,7 @@ def main():
 
 @app.route("/picUpload", methods=['GET', 'POST'])
 def picUpload():
-    global hum, tem, ntime, light, filename, hum, tem, ntime
+    global hum, tem, ntime, light, filename
     loadsucc = 0
     err = None
     camera = picamera.PiCamera()
