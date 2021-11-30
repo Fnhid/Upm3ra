@@ -166,10 +166,12 @@ def upload():
             db.commit()
             db.close()
             data = cur.fetchall()
-            if data:
+            if not data:
+                db.commit()
                 return redirect(url_for('main'))
             else:
-                err = 'Failed..'
+                db.rollback()
+                err = "Failed"
         return render_template("upload.html", err=err, hum=hum, tem=tem, light=light, filename=filename)
     else:
         return render_template("main.html")
