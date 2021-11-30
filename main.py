@@ -24,8 +24,8 @@ GPIO.setup(SWITCH_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 path = '/home/pi/Upm3ra/static/images/pic/'
 
 spi = spidev.SpiDev()
-
 global hum, tem, ntime, light, filename #vuln..
+
 
 def analog_read(channel):
     ret = spi.xfer2([1, (channel + 8) << 4, 0])
@@ -151,9 +151,11 @@ def upload():
     if request.form == 'POST':
         title = request.form['title']
         contents = request.form['contents']
+        light = request.form['light']
         filename = request.form['filename']
         db = mysql.connect()
         cur = db.cursor()
+
         sql = "INSERT into content values (%s, %s, %s, %s, %s, %s, %s)"
         cur.execute(sql, (title, contents, id, filename, hum, tem, light))
         db.commit()
