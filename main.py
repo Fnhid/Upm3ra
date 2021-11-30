@@ -133,8 +133,8 @@ def picUpload():
                 ntime = time.strftime("%Y%m%d_%H%M%S")
                 light = str(int(analog_read(0) / 1023 * 100)) + "%"
                 hum, tem = Adafruit_DHT.read_retry(sensor, DHT_PIN)
-                hum = str(int(hum))
-                tem = str(int(tem))
+                hum = str(int(hum)) + "%"
+                tem = str(int(tem)) + "℃"
                 
                 camera.capture('%s%s.jpg' % (path, ntime))
                 filename = path + ntime + '.jpg'
@@ -164,10 +164,8 @@ def upload():
             #filename = request.form['filename']
             db = mysql.connect()
             cur = db.cursor()
-            sql = "INSERT into content values (%s, %s, %s, %s, %s, %s, %s)"
+            sql = "INSERT INTO content VALUES (%s, %s, %s, %s, %s, %s, %s)"
             cur.execute(sql, (title, contents, id, filename, hum, tem, light))
-            db.commit()
-            db.close()
             data = cur.fetchall()
             if not data:
                 db.commit()
