@@ -125,7 +125,7 @@ def picUpload():
             spi.open(0, 0)
             spi.max_speed_hz = 100000
             GPIO.output(LED_PIN, GPIO.HIGH)
-            GPIO.wait_for_edge(21, GPIO.RISING)
+            GPIO.wait_for_edge(6, GPIO.RISING)
             GPIO.output(LED_PIN, GPIO.LOW)
             ntime = time.strftime("%Y%m%d_%H%M%S")
             light = analog_read(0) / 1023 * 100
