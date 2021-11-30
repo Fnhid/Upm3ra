@@ -25,6 +25,7 @@ path = '/home/pi/Upm3ra/static/images/pic/'
 
 spi = spidev.SpiDev()
 
+global hum, tem, ntime, light, filename
 
 def analog_read(channel):
     ret = spi.xfer2([1, (channel + 8) << 4, 0])
@@ -114,7 +115,6 @@ def main():
 
 @app.route("/picUpload", methods=['GET', 'POST'])
 def picUpload():
-    global hum, tem, ntime, light, filename
     loadsucc = 0
     err = None
     camera = picamera.PiCamera()
