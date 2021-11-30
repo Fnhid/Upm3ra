@@ -21,7 +21,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(LED_PIN, GPIO.OUT)
 GPIO.setup(SWITCH_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 global hum, tem, ntime, light, filename #vuln..
-path = '/home/pi/Upm3ra/static/images/pic/'
+path = '/static/images/pic/'
 
 spi = spidev.SpiDev()
 
@@ -153,7 +153,6 @@ def upload():
     global hum, tem, ntime, light, filename #vuln..
     err = None
     if session:
-
         if request.form == 'POST':
             title = request.form['title']
             contents = request.form['contents']
