@@ -145,7 +145,7 @@ def picUpload():
             camera.stop_preview()
             camera.close()
             if not loadsucc:
-                return render_template('picUpload.html', err=err, filename=os.listdir())
+                return render_template('picUpload.html', err=err)
     else:
         return render_template('main.html', data_list=data, user=user)
     
@@ -172,7 +172,7 @@ def upload():
             else:
                 db.rollback()
                 err = "Failed"
-        return render_template("upload.html", err=err, hum=hum, tem=tem, light=light, filename=filename)
+        return render_template("upload.html", err=os.listdir(), hum=hum, tem=tem, light=light, filename=filename)
     else:
         return render_template("main.html")
 if __name__ == "__main__":
