@@ -147,7 +147,7 @@ def picUpload():
 @app.route("/upload", methods=['GET', 'POST'])
 def upload():
     err = None
-    id = session['login_user']
+    username = session['login_user']
     if request.form == 'POST':
         title = request.form['title']
         contents = request.form['contents']
@@ -157,7 +157,7 @@ def upload():
         cur = db.cursor()
 
         sql = "INSERT into content values (%s, %s, %s, %s, %s, %s, %s)"
-        cur.execute(sql, (title, contents, id, filename, hum, tem, light))
+        cur.execute(sql, (title, contents, username, filename, hum, tem, light))
         db.commit()
         db.close()
         data = cur.fetchall()
