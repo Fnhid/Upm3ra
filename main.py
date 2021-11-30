@@ -145,7 +145,7 @@ def picUpload():
 def upload():
     err = None
     id = session['login_user']
-    if request.form == POST:
+    if request.form == 'POST':
         title = request.form['title']
         contents = request.form['contents']
         tem = request.form['tem']
