@@ -172,7 +172,7 @@ def upload():
             else:
                 db.rollback()
                 err = "Failed"
-        return render_template("upload.html", err=os.listdir(), hum=hum, tem=tem, light=light, filename=filename)
+        return render_template("upload.html", err=err, hum=hum, tem=tem, light=light, filename=filename)
     else:
         return render_template("main.html")
 if __name__ == "__main__":
