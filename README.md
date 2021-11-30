@@ -1,6 +1,6 @@
 # Upm3ra
 Upl0ad with Cam3ra. H0w S1mpl3! / KDMHS IoT Final Group Project.<br>
-라즈베리파이 카메라를 이용한 간단한 SNS 시스템을 만들어 보고자 합니다.
+flask와 라즈베리파이 카메라를 이용한 간단한 게시판 시스템을 만들어 보고자 합니다.
 
 <h2>--Patch Note--</h2>
 <dl>
