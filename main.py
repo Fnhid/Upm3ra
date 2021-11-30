@@ -21,7 +21,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(LED_PIN, GPIO.OUT)
 GPIO.setup(SWITCH_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 global hum, tem, ntime, light, filename #vuln..
-path = '/static/images/pic/'
+path = '/home/pi/Upm3ra/static/images'
 
 spi = spidev.SpiDev()
 
