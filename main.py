@@ -125,8 +125,7 @@ def picUpload():
             spi.open(0, 0)
             spi.max_speed_hz = 100000
             button = 0
-            
-            GPIO.output(LED_PIN, GPIO.LOW)
+            GPIO.output(LED_PIN, GPIO.HIGH)
             while not button:
                 if(GPIO.input(SWITCH_PIN)):
                     GPIO.output(LED_PIN, GPIO.LOW)
