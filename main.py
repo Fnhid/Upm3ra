@@ -115,58 +115,61 @@ def main():
 
 @app.route("/picUpload", methods=['GET', 'POST'])
 def picUpload():
-    loadsucc = 0
-    err = None
-    camera = picamera.PiCamera()
-    camera.resolution = (640, 480)
-    camera.start_preview()
-    try:
-        if camera and sensor and spi:
-            spi.open(0, 0)
-            spi.max_speed_hz = 100000
-            GPIO.output(LED_PIN, GPIO.HIGH)
-            GPIO.wait_for_edge(6, GPIO.RISING)
-            GPIO.output(LED_PIN, GPIO.LOW)
-            ntime = time.strftime("%Y%m%d_%H%M%S")
-            light = analog_read(0) / 1023 * 100
-            hum, tem = Adafruit_DHT.read_retry(sensor, DHT_PIN)
-            camera.capture('%s%s.jpg' % (path, ntime))
-            filename = path + ntime + '.jpg'
-            loadsucc = 1
-            return redirect(url_for('upload'))
-        else:
-            err = "No Camera or LDR or DHT Ready."
-            
-            GPIO.output(LED_PIN, GPIO.LOW)
-    finally:
-        camera.stop_preview()
-        camera.close()
-        if not loadsucc:
-            return render_template('picUpload.html', err=err)
+    if session:
+        loadsucc = 0
+        err = None
+        camera = picamera.PiCamera()
+        camera.resolution = (640, 480)
+        camera.start_preview()
+        try:
+            if camera and sensor and spi:
+                spi.open(0, 0)
+                spi.max_speed_hz = 100000
+                GPIO.output(LED_PIN, GPIO.HIGH)
+                GPIO.wait_for_edge(6, GPIO.RISING)
+                GPIO.output(LED_PIN, GPIO.LOW)
+                ntime = time.strftime("%Y%m%d_%H%M%S")
+                light = analog_read(0) / 1023 * 100
+                hum, tem = Adafruit_DHT.read_retry(sensor, DHT_PIN)
+                camera.capture('%s%s.jpg' % (path, ntime))
+                filename = path + ntime + '.jpg'
+                loadsucc = 1
+                return redirect(url_for('upload'))
+            else:
+                err = "No Camera or LDR or DHT Ready."
+                
+                GPIO.output(LED_PIN, GPIO.LOW)
+        finally:
+            camera.stop_preview()
+            camera.close()
+            if not loadsucc:
+                return render_template('picUpload.html', err=err)
+    else:
+        return render_template('main.html', data_list=data, user=user)
     
 @app.route("/upload", methods=['GET', 'POST'])
 def upload():
     err = None
-    username = session['login_user']
-    if request.form == 'POST':
-        title = request.form['title']
-        contents = request.form['contents']
-        light = request.form['light']
-        filename = request.form['filename']
-        db = mysql.connect()
-        cur = db.cursor()
-
-        sql = "INSERT into content values (%s, %s, %s, %s, %s, %s, %s)"
-        cur.execute(sql, (title, contents, username, filename, hum, tem, light))
-        db.commit()
-        db.close()
-        data = cur.fetchall()
-        if data:
-            return redirect(url_for('main'))
-        else:
-            err = 'Failed..'
-    return render_template("upload.html", err=err, hum=hum, tem=tem, light=light, filename=filename)
-
+    if session:
+        if request.form == 'POST':
+            title = request.form['title']
+            contents = request.form['contents']
+            light = request.form['light']
+            filename = request.form['filename']
+            db = mysql.connect()
+            cur = db.cursor()
+            sql = "INSERT into content values (%s, %s, %s, %s, %s, %s, %s)"
+            cur.execute(sql, (title, contents, id, filename, hum, tem, light))
+            db.commit()
+            db.close()
+            data = cur.fetchall()
+            if data:
+                return redirect(url_for('main'))
+            else:
+                err = 'Failed..'
+        return render_template("upload.html", err=err, hum=hum, tem=tem, light=light, filename=filename)
+    else:
+        return render_template("main.html")
 if __name__ == "__main__":
     try:
         app.run(host="0.0.0.0", debug=True)
