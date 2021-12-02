@@ -6,7 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hello, Ailen</title>
     <title>Document</title>
+<<<<<<< HEAD
     <!-- 게시물을 보여주는 페이지입니다. -->
+=======
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.0/font/bootstrap-icons.css" integrity="sha384-7ynz3n3tAGNUYFZD3cWe5PDcE36xj85vyFkawcF6tIwxvIecqKvfwLiaFdizhPpN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/design.css" />
+>>>>>>> f61d333ff988cbc9e385cf930f0a4f62e3ff8966
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lux/bootstrap.min.css" integrity="sha384-9+PGKSqjRdkeAU7Eu4nkJU8RFaH8ace8HGXnkiKMP9I9Te0GJ4/km3L1Z8tXigpG" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
@@ -29,7 +34,7 @@
   {% for obj in data_list %} 
   <div class="row">
     <div class="col s12 m6">
-      <div  width="70%" height="90%" class="div_box center-block card blue-grey darken-1">
+      <div  width="80%" height="100%" class="div_box center-block card blue-grey darken-1">
         <div class="card-content white-text">
           <img src={{obj[3]}} class="center-block" width="30%" height="30%"  alt="File Not Loaded">
           <span class="card-title">{{obj[0]}}</span>
@@ -37,7 +42,7 @@
           <p>{{obj[2]}}</p>
         </div>
         <div class="card-action">
-          <p>Humi : {{obj[4]}} / Temp : {{obj[5]}} / Light : {{obj[6]}}</p>
+          <p>Humi : {{obj[4]}} / <i class="bi bi-thermometer-half"></i> : {{obj[5]}} / Light : {{obj[6]}}</p>
         </div>
       </div>
     </div>
