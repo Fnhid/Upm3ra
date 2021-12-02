@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upm3ra</title>
+    <!-- 온습도 및 조도 정보를 출력하고, 추가 정보를 입력받는 페이지입니다. -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lux/bootstrap.min.css" integrity="sha384-9+PGKSqjRdkeAU7Eu4nkJU8RFaH8ace8HGXnkiKMP9I9Te0GJ4/km3L1Z8tXigpG" crossorigin="anonymous">
 </head>
 <body>
@@ -27,6 +28,7 @@
         <input type="submit" value="Submit">
     </div>
     </form>
+    <!-- 에러 발생시 출력 -->
     {% if err %}
         <div class="alert alert-dismissible alert-danger">
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
