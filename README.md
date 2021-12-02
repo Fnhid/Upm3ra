@@ -6,20 +6,6 @@ flask와 라즈베리파이 카메라를 이용한 간단한 게시판 시스템
 <dl>
       <dt>v1.0.0-alpha1</dt>
       <dd>Init Project.</dd>
+      <dt>v1.0.0-release</dt>
+      <dd>added some simple features : sign in, sign up, upload</dd>
 </dl>
-<!-- {% for i in data_list %}
-            <tr>
-                <td>
-                    {{ i }}
-                </td>
-                <td>
-                    {{ i[0] }}
-                </td>
-                <td>
-                    {{ i[1] }}
-                </td>
-                <td>
-                    {{ i[2] }}
-                </td>
-            </tr>
-            {% endfor % } -->

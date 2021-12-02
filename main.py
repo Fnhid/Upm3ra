@@ -172,7 +172,7 @@ def upload():
                 return redirect(url_for('main'))
             else:
                 db.rollback()
-                err = "failed"
+                err = "Uploading failed.."
         return render_template("upload.html", err=err, hum=hum, tem=tem, light=light, filename=filename)
     else:
         return render_template("main.html")
