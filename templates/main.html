@@ -39,6 +39,12 @@
     </div>
   </div>
   {% endfor %}
+  {% if {{err}} %}
+        <div class="alert alert-dismissible alert-danger">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <strong>Error!</strong> <a href="#" class="alert-link">{{err}}</a> try submitting again.
+          </div>
+  {% endif %}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>
