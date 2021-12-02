@@ -1,0 +1,14 @@
+body{
+    background-color: #e2fcffcb;
+    font-family: "Roboto", sans-serif;
+}
+
+title{
+    text-align: center;
+    color: #82acb1cb;
+    text-shadow: -2px 0 #587477cb, 0 2px #587477cb, 2px 0 #587477cb, 0 -2px #587477cb;
+}
+
+.card-action{
+    padding-top: 13px;
+}
