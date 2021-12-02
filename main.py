@@ -22,7 +22,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(LED_PIN, GPIO.OUT)       
 GPIO.setup(SWITCH_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 global hum, tem, ntime, light, filename 
-path = './static/images/' # 이미지 저장 기본 경로 설정
+path = './static/images/pic/' # 이미지 저장 기본 경로 설정
 
 spi = spidev.SpiDev()  
 
