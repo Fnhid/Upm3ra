@@ -14,11 +14,11 @@
       <!-- POST로 정보를 보냅니다. -->
       <form method="POST">
         <label>Username (ID)</label>
-        <input name="id" type="username" placeholder="" />
+        <input name="id" type="username" placeholder="" required/>
         <label>Password</label>
-        <input name="pw" type="password" placeholder="" />
+        <input name="pw" type="password" placeholder="" required/>
         <label>Confirm Password</label>
-        <input name="ckpw" type="password" placeholder="" />
+        <input name="ckpw" type="password" placeholder="" required/>
         <input type="submit" value="Submit" />
       </form>
     </div>
@@ -28,8 +28,7 @@
     <!-- 에러 발생시 출력 -->
     {% if err %}
         <div class="alert alert-dismissible alert-danger">
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            <strong>Error!</strong> <a href="#" class="alert-link">{{err}}</a> try submitting again.
+            <strong>{{err}}</strong> try submitting again.
           </div>
     {% endif %}
   </body>
