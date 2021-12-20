@@ -14,7 +14,7 @@ title{
 }
 
 #picture {
-    text-align: center;
+    text-align: center !important;
     width: auto;
     height: auto;
     border: 3px solid #1a3538cb;
@@ -22,7 +22,7 @@ title{
 }
 
 .enteredtext {
-    text-align: center;
+    text-align: center !important;
     background-color: #587477cb;
     color: white;
     border: 1px solid white;
