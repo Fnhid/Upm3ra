@@ -108,7 +108,7 @@ def main():
             cur.close()
             db.close()
             return render_template('main.html', data_list=data, user=user)
-    else:
+    else:  
         return redirect(url_for('signin'))
 
 
@@ -142,7 +142,7 @@ def picUpload():
                 err = "No Camera or LDR or DHT Ready."
                 
                 GPIO.output(LED_PIN, GPIO.LOW)
-        finally:
+        finally:    
             camera.stop_preview()
             camera.close()
             if not loadsucc: # 카메라, 온습도 모듈, 조도센서가 연결되지 않았을 때
