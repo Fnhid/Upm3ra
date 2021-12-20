@@ -18,3 +18,18 @@ h1 {
     margin: 10 auto;
     text-align: center;
 }
+
+#picture {
+    text-align: center;
+    width: auto;
+    height: auto;
+    border: 3px solid #1a3538cb;
+    padding: 0px;
+}
+
+.enteredtext {
+    text-align: center;
+    background-color: #587477cb;
+    color: white;
+    border: 1px solid white;
+}

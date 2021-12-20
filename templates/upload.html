@@ -4,25 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/design.css" />
     <title>Upm3ra</title>
     <!-- 온습도 및 조도 정보를 출력하고, 추가 정보를 입력받는 페이지입니다. -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lux/bootstrap.min.css" integrity="sha384-9+PGKSqjRdkeAU7Eu4nkJU8RFaH8ace8HGXnkiKMP9I9Te0GJ4/km3L1Z8tXigpG" crossorigin="anonymous">
 </head>
 <body>
-    <div><div>
-    <img src="{{filename}}" alt="Your Imag3"></a></div>
-    <div><h3>Temp : {{tem}}</h3></div>
-    <div><h3>Humi : {{hum}}</h3></div>
-    <div><h3>Light : {{light}}</h3></div>
+    <div>
+        <div id="picture"><img src="{{filename}}" alt="Your Imag3"></a></div>
+        <div class="enteredtext"><h3>Temp : {{tem}}</h3></div>
+        <div class="enteredtext"><h3>Humi : {{hum}}</h3></div>
+        <div class="enteredtext"><h3>Light : {{light}}</h3></div>
     </div>
     <form method="POST">
         <div class="form-group">
             <label class="col-form-label mt-4" for="inputDefault">Title</label>
-            <input name="title" type="text" class="form-control" placeholder="Default input" id="inputDefault" required>
+            <input name="title" type="text" class="form-control" placeholder="Default input" id="inputDefault">
           </div>
         <div class="form-group">
             <label for="exampleTextarea" class="form-label mt-4">Contents</label>
-            <textarea name="contents" class="form-control" id="exampleTextarea" rows="3" required></textarea>
+            <textarea name="contents" class="form-control" id="exampleTextarea" rows="3"></textarea>
         </div>
         <div>
         <input type="submit" value="Submit">
@@ -30,8 +31,9 @@
     </form>
     <!-- 에러 발생시 출력 -->
     {% if err %}
-        <div class="alert alert-dismissible alert-danger"style="color:gray">
-            <strong>{{err}}</strong> try submitting again.
+        <div class="alert alert-dismissible alert-danger">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <strong>Error!</strong> <a href="#" class="alert-link">{{err}}</a> try submitting again.
           </div>
     {% endif %}
     
