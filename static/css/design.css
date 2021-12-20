@@ -12,3 +12,19 @@ title{
 .card-action{
     padding-top: 13px;
 }
+
+.entered {
+    text-align: center;
+}
+
+#picture {
+    width: auto;
+    height: auto;
+    
+}
+
+.enteredtext {
+    background-color: #587477cb;
+    color: white;
+    border: 1px solid white;
+}
