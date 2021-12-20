@@ -12,3 +12,9 @@ title{
 .card-action{
     padding-top: 13px;
 }
+
+h1 {
+    width:500px;
+    margin: 10 auto;
+    text-align: center;
+}
