@@ -11,10 +11,9 @@
     <h1>Press the button 2 take pic7ur3!</h1>
     <!-- 에러 발생시 출력 -->
     {% if err %}
-        <div class="alert alert-dismissible alert-danger">
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            <strong>Error!</strong> <a href="#" class="alert-link">{{err}}</a> try submitting again.
-          </div>
+    <div style="color:white" class="alert alert-dismissible alert-danger">
+        <strong>{{err}}</strong> try submitting again.
+      </div>
     {% endif %}
 </body>
 </html>
