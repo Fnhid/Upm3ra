@@ -20,11 +20,11 @@
 </head>
 <body>
   
-  <div>
+  <div class="div_box">
     <div>
-    <h1>Hi {{user}}</h1>
-  </div>
-  <div><button href="#" class="card-link" class="btn btn-primary" onclick="location.href='/picUpload'">Upload!</button></div>
+    <h1 style="text-align: center" width="80%" height="100%">Hi {{user}}</h1>
+  <div style="margin-left:80%; margin-right:10%"><button href="#" class="card-link" class="btn btn-primary" onclick="location.href='/picUpload'">Upload!</button></div>
+</div>
   <!-- for문을 돌면서 받아온 튜플을 출력합니다. -->
   <!-- obj[0], obj[1], obj[2], obj[3], obj[4], obj[5], obj[6] -->
   <!-- title, contents, id,    filename, hum,   tem,    light -->
@@ -35,10 +35,10 @@
         <div class="card-content white-text">
           <img src={{obj[3]}} class="center-block" width="30%" height="30%"  alt="File Not Loaded">
           <span class="card-title">{{obj[0]}}</span>
-          <h5>{{obj[1]}}</h5>
-          <p>{{obj[2]}}</p>
+          <p style="color:rgb(212, 212, 212)">{{obj[1]}}</p>
+          <h5>{{obj[2]}}</h5>
         </div>
-        <div class="card-action">
+        <div class="card-action" style="color:rgb(212, 212, 212)">
           <p>Humi : {{obj[4]}} / <i class="bi bi-thermometer-half"></i> : {{obj[5]}} / Light : {{obj[6]}}</p>
         </div>
       </div>
